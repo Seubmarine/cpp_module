@@ -24,6 +24,10 @@ std::string string_truncated_at(std::string str, size_t max_size = 10) {
 }
 
 void PhoneBook::list_contact(void) {
+    if (this->length == 0) {
+        std::cout << "Phonebook is empty" << std::endl;
+        return ;
+    }
     for (size_t i = 0; i < this->length; i++)
     {
         Contact &current = this->contacts[i];
@@ -46,6 +50,7 @@ void PhoneBook::list_contact(void) {
     std::cout << "\nSelect Contact Index :" << std::endl;
     size_t prompt_index = 9;
     if (!(std::cin >> prompt_index)) { //check if the user inputed a valid number
+       std::cin.clear();
        return ;
     }
     if (prompt_index > this->capacity || prompt_index >= this->length) {
