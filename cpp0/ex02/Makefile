@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 NAME = account
 
 SRCS = Account.cpp tests.cpp
-INCLUDE = Account.hpp
+INCLUDE = -I Account.hpp
 OBJS = $(SRCS:%.cpp=%.o)
 
 %.o: %.cpp
