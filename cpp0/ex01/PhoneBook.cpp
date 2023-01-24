@@ -45,7 +45,9 @@ void PhoneBook::list_contact(void) {
 
     std::cout << "\nSelect Contact Index :" << std::endl;
     size_t prompt_index = 9;
-    std::cin >> prompt_index;
+    if (!(std::cin >> prompt_index)) { //check if the user inputed a valid number
+       return ;
+    }
     if (prompt_index > this->capacity || prompt_index >= this->length) {
         std::cout << "\nInvalid Index\n" << std::endl;
     }
