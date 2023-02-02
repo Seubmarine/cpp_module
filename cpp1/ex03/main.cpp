@@ -19,7 +19,7 @@ int main()
 		club.setType("some other type of club");
 		jim.attack();
 	}
-	{
+	{ //check for special case null weapon for HumanB
 		HumanB tom("Tom");
 		tom.attack();
 		Weapon bat("Baseball bat");
