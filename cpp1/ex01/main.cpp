@@ -35,7 +35,18 @@ void test_bad_alloc() {
 }
 
 void test_ok() {
-	new_horde_announce_die(3, "Mary");
+	size_t mary_count = 3;
+	Zombie *marys = zombieHorde(mary_count, "Mary");
+	size_t gabe_count = 7;
+	Zombie *gabes = zombieHorde(gabe_count, "Gabe");
+	for (size_t i = 0; i < mary_count; i++) {
+		marys[i].announce();
+	}
+	for (size_t i = 0; i < gabe_count; i++) {
+		gabes[i].announce();
+	}
+	delete[] marys;
+	delete[] gabes;
 }
 
 int main(void)
