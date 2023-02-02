@@ -2,6 +2,23 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+bool is_file(std::string pathname) {
+	struct stat info;
+
+	if( stat( pathname.c_str(), &info ) != 0 )
+	{
+		std::cout << "cannot access " << pathname << std::endl;
+		return false;
+	}
+	else if( info.st_mode & S_IFDIR )  // S_ISDIR() doesn't exist on my windows 
+		return false;
+	else
+		return true;
+}
+
 int main(int argc, char const *argv[])
 {
 	if (argc < 4) {
@@ -14,7 +31,7 @@ int main(int argc, char const *argv[])
 	std::string replace_str = argv[3];
 
 	std::ifstream original_file(filename.c_str());
-	if (!original_file.is_open()) {
+	if (!original_file.is_open() || !is_file(filename)) {
 		std::cerr << "Couldn't open file " << filename << std::endl;
 		return (1);
 	}
