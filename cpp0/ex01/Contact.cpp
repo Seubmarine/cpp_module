@@ -42,3 +42,19 @@ Contact::~Contact()
 {
     
 }
+
+std::string const &Contact::getFirstName() const {
+	return this->first_name;
+}
+std::string const &Contact::getLastName() const {
+	return this->last_name;
+}
+std::string const &Contact::getNickname() const {
+	return this->nickname;
+}
+std::string const &Contact::getDarkestSecret() const {
+	return this->darkest_secret;
+}
+std::string const &Contact::getPhoneNumber()const {
+	return this->phone_number;
+}

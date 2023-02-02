@@ -35,14 +35,14 @@ void PhoneBook::list_contact(void) {
         std::cout << i << "|";
         
         std::cout << std::setw(10);
-        std::cout << string_truncated_at(current.first_name) << "|";
+        std::cout << string_truncated_at(current.getFirstName()) << "|";
         
         std::cout << std::setw(10);
-        std::cout << string_truncated_at(current.last_name) << "|";
+        std::cout << string_truncated_at(current.getLastName()) << "|";
         
         
         std::cout << std::setw(10);
-        std::cout << string_truncated_at(current.nickname) << "|";
+        std::cout << string_truncated_at(current.getNickname()) << "|";
     
         std::cout << std::endl;
     }
