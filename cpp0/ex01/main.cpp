@@ -38,7 +38,8 @@ int main(void)
         InputState asked_state = INVALID;
         std::cout << "Input a command: " << std::endl;
         Contact contact_to_add;
-        std::cin >> asked_state;
+        if (!(std::cin >> asked_state))
+			running = false;
         switch (asked_state)
         {
         case ADD:
