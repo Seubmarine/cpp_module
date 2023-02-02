@@ -47,7 +47,7 @@ int main(int argc, char const *argv[])
 	//if no correspondance is found we write the current char and advance by one
 	size_t i = 0;
 	while ( i < buffer_str.length()) {
-		if (buffer_str.compare(i, original_str.length(), original_str) == 0) {
+		if (original_str.length() != 0 && buffer_str.compare(i, original_str.length(), original_str) == 0) {
 			replace_file << replace_str;
 			i += original_str.length();
 		}
