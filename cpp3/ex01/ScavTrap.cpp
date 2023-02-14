@@ -4,14 +4,14 @@
 ScavTrap::ScavTrap() {
 	this->hit_point = 100;
 	this->energy_point = 50;
-	this->attack_damage = 30;
+	this->attack_damage = 20;
 	std::cout << "ScavTrap Default Constructor" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name) {
 	this->hit_point = 100;
 	this->energy_point = 50;
-	this->attack_damage = 30;
+	this->attack_damage = 20;
 	this->name = name;
 	std::cout << "ScavTrap Constructor name: " << this->name << std::endl;
 }
