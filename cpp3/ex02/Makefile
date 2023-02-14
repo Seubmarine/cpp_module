@@ -25,4 +25,4 @@ fclean: clean
 
 re: fclean
 	$(MAKE) all
-.PHONY: re all
+.PHONY: all clean fclean re
