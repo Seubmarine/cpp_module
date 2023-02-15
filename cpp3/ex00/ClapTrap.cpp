@@ -17,7 +17,10 @@ ClapTrap::ClapTrap(const ClapTrap &claptrap) {
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &claptrap) {
-	*this = claptrap;
+	this->hit_point = claptrap.hit_point;
+	this->attack_damage = claptrap.attack_damage;
+	this->energy_point = claptrap.energy_point;
+	this->name = claptrap.name;
 	std::cout << "ClapTrap Copy Assign: " << this->name << std::endl;
 	return *this;
 }
