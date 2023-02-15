@@ -8,7 +8,7 @@ FragTrap::FragTrap() {
 	std::cout << "FragTrap Default Constructor" << std::endl;
 }
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name) {
+FragTrap::FragTrap(std::string name) {
 	this->hit_point = 100;
 	this->energy_point = 100;
 	this->attack_damage = 30;
@@ -18,6 +18,21 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name) {
 
 FragTrap::~FragTrap() {
 	std::cout << "FragTrap " << this->name << " was destroyed." << std::endl;
+}
+
+FragTrap::FragTrap(const FragTrap &fragtrap) {
+	*this = fragtrap;
+	std::cout << "FragTrap Copy Constructor: " << this->name << std::endl;
+}
+
+FragTrap &FragTrap::operator=(const FragTrap &fragtrap) {
+	// *this = FragTrap;
+	this->hit_point = fragtrap.hit_point;
+	this->attack_damage = fragtrap.attack_damage;
+	this->energy_point = fragtrap.energy_point;
+	this->name = fragtrap.name;
+	std::cout << "FragTrap Copy Assign: " << this->name << std::endl;
+	return *this;
 }
 
 void FragTrap::attack(const std::string &target) {

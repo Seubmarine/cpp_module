@@ -1,6 +1,5 @@
 #include "ScavTrap.hpp"
 #include <iostream>
-#include <string>
 
 ScavTrap::ScavTrap() {
 	this->hit_point = 100;
@@ -9,7 +8,7 @@ ScavTrap::ScavTrap() {
 	std::cout << "ScavTrap Default Constructor" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
+ScavTrap::ScavTrap(std::string name) {
 	this->hit_point = 100;
 	this->energy_point = 50;
 	this->attack_damage = 20;
@@ -19,6 +18,22 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 
 ScavTrap::~ScavTrap() {
 	std::cout << "ScavTrap " << this->name << " was destroyed." << std::endl;
+}
+
+
+ScavTrap::ScavTrap(const ScavTrap &scavtrap) {
+	*this = scavtrap;
+	std::cout << "ScavTrap Copy Constructor: " << this->name << std::endl;
+}
+
+ScavTrap &ScavTrap::operator=(const ScavTrap &scavtrap) {
+	// *this = scavtrap;
+	this->hit_point = scavtrap.hit_point;
+	this->attack_damage = scavtrap.attack_damage;
+	this->energy_point = scavtrap.energy_point;
+	this->name = scavtrap.name;
+	std::cout << "ScavTrap Copy Assign: " << this->name << std::endl;
+	return *this;
 }
 
 void ScavTrap::attack(const std::string &target) {

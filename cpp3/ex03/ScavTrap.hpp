@@ -7,6 +7,8 @@ private:
 public:
 	ScavTrap();
 	ScavTrap(std::string name);
+	ScavTrap(const ScavTrap &scavtrap);
+	ScavTrap &operator=(const ScavTrap &scavtrap);
 	~ScavTrap();
 
 	// ScavTrap &operator=(const ScavTrap &scavtrap);
