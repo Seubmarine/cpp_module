@@ -20,6 +20,22 @@ ScavTrap::~ScavTrap() {
 	std::cout << "ScavTrap " << this->name << " was destroyed." << std::endl;
 }
 
+
+ScavTrap::ScavTrap(const ScavTrap &scavtrap) {
+	*this = scavtrap;
+	std::cout << "ScavTrap Copy Constructor: " << this->name << std::endl;
+}
+
+ScavTrap &ScavTrap::operator=(const ScavTrap &scavtrap) {
+	// *this = scavtrap;
+	this->hit_point = scavtrap.hit_point;
+	this->attack_damage = scavtrap.attack_damage;
+	this->energy_point = scavtrap.energy_point;
+	this->name = scavtrap.name;
+	std::cout << "ScavTrap Copy Assign: " << this->name << std::endl;
+	return *this;
+}
+
 void ScavTrap::attack(const std::string &target) {
 	if (this->energy_point == 0) {
 		std::cout << "ScavTrap " << this->name << " doesn't have any energy left in it." << std::endl;
