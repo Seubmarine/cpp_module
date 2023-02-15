@@ -67,7 +67,19 @@ void make_tests(int value_of_b, float value_of_c) {
 }
 
 int main(void) {
-  make_tests(14, 50.125f);
-  std::cout << "Now same thing but with negative numbers:" << std::endl;
-  make_tests(-12, -80.175829380f);
+	{
+		Fixed a;
+		Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+		std::cout << a << std::endl;
+		std::cout << ++a << std::endl;
+		std::cout << a << std::endl;
+		std::cout << a++ << std::endl;
+		std::cout << a << std::endl;
+		std::cout << b << std::endl;
+		std::cout << Fixed::max( a, b ) << std::endl;
+		std::cout << "END OF FIRST TEST\n" << std::endl;
+	}
+	make_tests(14, 50.125f);
+	std::cout << "Now same thing but with negative numbers:" << std::endl;
+	make_tests(-12, -80.175829380f);
 }
