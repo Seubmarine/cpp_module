@@ -10,5 +10,11 @@ int main( void ) {
 	std::cout << b.getRawBits() << std::endl;
 	std::cout << c.getRawBits() << std::endl;
 
+	{
+		Fixed test;
+		test.setRawBits(42);
+		std::cout << test.getRawBits() << std::endl;
+	}
+
 	return 0;
 }
