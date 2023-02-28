@@ -4,9 +4,12 @@
 
 Dog::Dog() {
 	this->type = "Dog";
+	std::cout << this->type << " constructor called" << std::endl;
 }
 
-Dog::~Dog() {}
+Dog::~Dog() {
+	std::cout << this->type << " destructor called" << std::endl;
+}
 
 Dog& Dog::operator=(const Dog&rhs) {
 	*this = rhs;

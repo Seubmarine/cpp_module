@@ -2,10 +2,12 @@
 
 WrongAnimal::WrongAnimal() : type("WrongAnimal")
 {
+	std::cout << this->type << " base class constructor called" << std::endl;
 }
 
 WrongAnimal::~WrongAnimal()
 {
+	std::cout << this->type << " base class destructor called" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal &from) {
