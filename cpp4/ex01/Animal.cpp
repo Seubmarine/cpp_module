@@ -4,7 +4,9 @@
 
 Animal::Animal() {}
 
-Animal::~Animal() {}
+Animal::~Animal() {
+	std::cout << "Destroy an Animal" << std::endl;
+}
 
 Animal& Animal::operator=(const Animal&rhs) {
 	*this = rhs;
