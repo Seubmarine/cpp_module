@@ -1,11 +1,11 @@
 #include "Cure.hpp"
 #include <iostream>
 
-Cure::Cure () : AMateria() {
+Cure::Cure() : AMateria() {
     this->type = "cure";
 }
 
-Cure::~Cure () {}
+Cure::~Cure() {}
 
 Cure::Cure(const Cure &rhs) : AMateria() {
     this->type = rhs.type;

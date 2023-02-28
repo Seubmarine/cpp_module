@@ -23,6 +23,11 @@ void default_example() {
 
     me->use(0, *bob);
     me->use(1, *bob);
+
+	src->learnMateria(new Ice());
+	src->learnMateria(new Ice());
+	src->learnMateria(new Ice());
+	src->learnMateria(new Ice());
     delete bob;
     delete me;
     delete src;
@@ -30,21 +35,30 @@ void default_example() {
 
 int main()
 {
-    // default_example();
+    default_example();
 
     AMateria *mat_ice = new Ice();
     AMateria *mat_cure = new Cure();
-    
-    AMateria *mat_from = mat_ice;
-    *mat_from = *mat_cure;
+    *mat_cure = *mat_ice;
 
-    ICharacter *tmp = new Character("Theo");
+	Character *ptr_hero = new Character("Theo");
+    ICharacter *hero = ptr_hero;
+	hero->equip(mat_ice);
+	hero->equip(mat_cure);
 
-    tmp->equip(mat_from);
-    tmp->use(0, *tmp);
-    std::cout << mat_from->getType() << std::endl;
+	ICharacter *danpleganger = new Character(*ptr_hero);
+
+	hero->use(0, *danpleganger);
+	hero->use(1, *danpleganger);
+
+	delete mat_cure;
     delete mat_ice;
-    delete mat_cure;
-    delete tmp;
+	delete hero;
+
+	danpleganger->unequip(0);
+	danpleganger->unequip(1);
+	danpleganger->unequip(2);
+	danpleganger->unequip(3);
+	delete danpleganger;
     return 0;
 }
