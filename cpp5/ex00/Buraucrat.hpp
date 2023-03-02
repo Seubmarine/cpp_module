@@ -12,12 +12,21 @@ private:
 public:
     class GradeTooHighException : public std::exception {};
     class GradeTooLowException : public std::exception {};
-    Buraucrat();
+    Buraucrat(std::string name, int grade);
+
+	Buraucrat();
     ~Buraucrat();
     Buraucrat(const Buraucrat &rhs);
     const Buraucrat &operator=(const Buraucrat &rhs);
+	
+	static void checkGrade(int i);
 
-    Buraucrat(std::string name, int grade);
+	const std::string getName() const;
+	int getGrade() const;
+	void gradeIncrement();
+	void gradeDecrement();
 };
+
+std::ostream &operator<<(std::ostream &os, Buraucrat const &m);
 
 #endif
