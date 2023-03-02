@@ -4,9 +4,12 @@
 
 Cat::Cat() {
 	this->type = "Cat";
+	std::cout << this->type << " constructor called" << std::endl;
 }
 
-Cat::~Cat() {}
+Cat::~Cat() {
+	std::cout << this->type << " destructor called" << std::endl;
+}
 
 Cat& Cat::operator=(const Cat&rhs) {
 	*this = rhs;

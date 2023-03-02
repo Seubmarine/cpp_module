@@ -6,8 +6,8 @@
 class Cure : public virtual AMateria
 {
 public:
-    Cure ();
-    ~Cure ();
+    Cure();
+    ~Cure();
     Cure(const Cure &rhs);
     Cure &operator=(const AMateria &rhs);
     AMateria *clone() const;

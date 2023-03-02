@@ -2,9 +2,13 @@
 #include <string>
 #include <iostream>
 
-Animal::Animal() {}
+Animal::Animal() : type("Animal") {
+	std::cout << this->type << " base class constructor called" << std::endl;
+}
 
-Animal::~Animal() {}
+Animal::~Animal() {
+	std::cout << this->type << " base class destructor called" << std::endl;
+}
 
 Animal& Animal::operator=(const Animal&rhs) {
 	*this = rhs;
