@@ -1,41 +1,41 @@
-#include "Buraucrat.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 
 int main()
 {
-    Buraucrat one("Theo", 1);
+    Bureaucrat one("Theo", 1);
 
-    Buraucrat two("Kevin", 150);
+    Bureaucrat two("Kevin", 150);
     
 	try {
-		Buraucrat bad_too_high("BadTheo", 0);
+		Bureaucrat bad_too_high("BadTheo", 0);
 	}
-	catch (Buraucrat::GradeTooHighException &)
+	catch (Bureaucrat::GradeTooHighException &)
 	{
 		std::cout << "Create Instance with too high exception" << std::endl;
 	}
 
 
 	try {
-	    Buraucrat bad_too_low("BadKevin", 151);
+	    Bureaucrat bad_too_low("BadKevin", 151);
 	}
-	catch (Buraucrat::GradeTooLowException &)
+	catch (Bureaucrat::GradeTooLowException &)
 	{
 		std::cout << "Create Instance with too low exception" << std::endl;
 	}
 
 	//increment test
 	try {
-		Buraucrat inc_test("inc", 1);
+		Bureaucrat inc_test("inc", 1);
 		inc_test.gradeDecrement();
 		inc_test.gradeIncrement();
 		inc_test.gradeIncrement();
 	}
-	catch (Buraucrat::GradeTooHighException &)
+	catch (Bureaucrat::GradeTooHighException &)
 	{
 		std::cout << "increment exception" << std::endl;
 	}
-	catch (Buraucrat::GradeTooLowException &)
+	catch (Bureaucrat::GradeTooLowException &)
 	{
 		std::cout << "decrement exception" << std::endl;
 	}
@@ -43,16 +43,16 @@ int main()
 
 	//decrement test
 	try {
-		Buraucrat dec_test("dec", 150);
+		Bureaucrat dec_test("dec", 150);
 		dec_test.gradeIncrement();
 		dec_test.gradeDecrement();
 		dec_test.gradeDecrement();
 	}
-	catch (Buraucrat::GradeTooHighException &)
+	catch (Bureaucrat::GradeTooHighException &)
 	{
 		std::cout << "increment exception" << std::endl;
 	}
-	catch (Buraucrat::GradeTooLowException &)
+	catch (Bureaucrat::GradeTooLowException &)
 	{
 		std::cout << "decrement exception" << std::endl;
 	}

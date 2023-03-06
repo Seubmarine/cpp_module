@@ -1,9 +1,9 @@
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 
-NAME = buraucrat
+NAME = bureaucrat
 
-SRCS = main.cpp Buraucrat.cpp
+SRCS = main.cpp Bureaucrat.cpp
 
 INCLUDE =
 
