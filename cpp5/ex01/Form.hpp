@@ -2,9 +2,9 @@
 #define FORM_HPP
 
 #include <string>
-#include "Buraucrat.hpp"
+#include "Bureaucrat.hpp"
 
-class Buraucrat;
+class Bureaucrat;
 
 class Form
 {
@@ -29,7 +29,7 @@ public:
     bool getSign() const;
     int getGradeRequirementToSign() const;
     int getGradeRequirementToExecute() const;
-    void beSigned(Buraucrat &buraucrat);
+    void beSigned(Bureaucrat &buraucrat);
 };
 
 std::ostream &operator<<(std::ostream &os, const Form &form);

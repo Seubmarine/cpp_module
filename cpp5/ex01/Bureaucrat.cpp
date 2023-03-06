@@ -1,24 +1,24 @@
-#include "Buraucrat.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 
-void Buraucrat::checkGrade(int grade) {
+void Bureaucrat::checkGrade(int grade) {
     if (grade < 1)
-        throw Buraucrat::GradeTooHighException();
+        throw Bureaucrat::GradeTooHighException();
     else if (grade > 150)
-        throw Buraucrat::GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
 }
 
-Buraucrat::Buraucrat() : grade(150) {
+Bureaucrat::Bureaucrat() : grade(150) {
 	this->checkGrade(this->grade);
 }
 
-Buraucrat::~Buraucrat() {}
+Bureaucrat::~Bureaucrat() {}
 
-Buraucrat::Buraucrat(const Buraucrat &rhs) : name(rhs.name), grade(rhs.grade) {
+Bureaucrat::Bureaucrat(const Bureaucrat &rhs) : name(rhs.name), grade(rhs.grade) {
 	this->checkGrade(this->grade);
 }
 
-const Buraucrat &Buraucrat::operator=(const Buraucrat &rhs) {
+const Bureaucrat &Bureaucrat::operator=(const Bureaucrat &rhs) {
     if (this != &rhs) {
         this->grade = rhs.grade;
     }
@@ -26,33 +26,33 @@ const Buraucrat &Buraucrat::operator=(const Buraucrat &rhs) {
     return *this;
 }
 
-Buraucrat::Buraucrat(std::string name, int grade) : name(name), grade(grade) {
+Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade) {
 	this->checkGrade(this->grade);
 }
-const std::string Buraucrat::getName() const {
+const std::string Bureaucrat::getName() const {
 	return this->name;
 }
 
-int Buraucrat::getGrade() const {
+int Bureaucrat::getGrade() const {
 	return this->grade;
 }
 
-void Buraucrat::gradeIncrement() {
+void Bureaucrat::gradeIncrement() {
 	this->checkGrade(this->grade - 1);
 	this->grade -= 1;
 }
 
-void Buraucrat::gradeDecrement() {
+void Bureaucrat::gradeDecrement() {
 	this->checkGrade(this->grade + 1);
 	this->grade += 1;
 }
 
-std::ostream &operator<<(std::ostream &os, Buraucrat const &m) {
+std::ostream &operator<<(std::ostream &os, Bureaucrat const &m) {
 	os << m.getName() << ", bureaucrat grade " << m.getGrade() << ".";
 	return os;
 }
 
-void Buraucrat::signForm(Form &form) {
+void Bureaucrat::signForm(Form &form) {
 	try {
 		form.beSigned(*this);
 		std::cout << this->getName() << " signed " << form.getName() << std::endl;

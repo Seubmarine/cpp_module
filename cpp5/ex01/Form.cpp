@@ -52,7 +52,7 @@ int Form::getGradeRequirementToExecute() const {
     return this->grade_requirement_to_execute;
 }
 
-void Form::beSigned(Buraucrat &buraucrat) {
+void Form::beSigned(Bureaucrat &buraucrat) {
     if (buraucrat.getGrade() <= this->grade_requirement_to_sign) {
         this->sign = true;
     }

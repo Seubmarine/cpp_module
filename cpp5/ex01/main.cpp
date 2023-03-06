@@ -1,4 +1,4 @@
-#include <Buraucrat.hpp>
+#include <Bureaucrat.hpp>
 #include <Form.hpp>
 #include <iostream>
 
@@ -21,7 +21,7 @@ int main()
 		std::cout << "Create Instance with grade too low exception" << std::endl;
 	}
 
-    Buraucrat theo("Theo", 55);
+    Bureaucrat theo("Theo", 55);
     Form normal("Normal", 54, 150);
 
     std::cout << normal << std::endl << std::endl;
