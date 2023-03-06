@@ -60,7 +60,7 @@ void Bureaucrat::signForm(AForm &form) {
 		form.beSigned(*this);
 		std::cout << this->getName() << " signed " << form.getName() << std::endl;
 	} catch (AForm::GradeTooLowException &e) {
-		std::cout << "Form " << this->getName() << " need a grade of " << form.getGradeRequirementToExecute() << "to be signed, but bureaucrat " << this->getName() << " only has a grade of " << this->getGrade() << std::endl;
+		std::cout << "Form " << form.getName() << " need a grade of " << form.getGradeRequirementToExecute() << " to be signed, but bureaucrat " << this->getName() << " only has a grade of " << this->getGrade() << std::endl;
 	}
 }
 
@@ -68,8 +68,8 @@ void Bureaucrat::executeForm(AForm const &form) {
 	try {
 		form.execute(*this);
 	} catch (const AForm::NotSignedException &e) {
-		std::cout << "Form " << this->getName() << " is not signed so it can't be executed" << std::endl;
+		std::cout << "Form " << form.getName() << " is not signed so it can't be executed" << std::endl;
 	} catch (const AForm::GradeTooLowException &e) {
-		std::cout << "Form " << this->getName() << " need a grade of " << form.getGradeRequirementToExecute() << "to be executed, but bureaucrat " << this->getName() << " only has a grade of " << this->getGrade() << std::endl;
+		std::cout << "Form " << form.getName() << " need a grade of " << form.getGradeRequirementToExecute() << " to be executed, but bureaucrat " << this->getName() << " only has a grade of " << this->getGrade() << std::endl;
 	}
 }

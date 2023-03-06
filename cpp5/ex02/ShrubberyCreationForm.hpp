@@ -6,7 +6,7 @@
 class ShrubberyCreationForm : public AForm {
 private:
 	std::string target;
-	void execute_real() const;
+	virtual void execute_real() const;
 
 public:
 	ShrubberyCreationForm(std::string target);
