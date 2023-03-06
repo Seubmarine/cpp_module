@@ -60,6 +60,6 @@ void Bureaucrat::signForm(Form &form) {
 		form.beSigned(*this);
 		std::cout << this->getName() << " signed " << form.getName() << std::endl;
 	} catch (Form::GradeTooLowException &e) {
-		std::cout << "Form " << this->getName() << " need a grade of " << form.getGradeRequirementToExecute() << " to be signed, but bureaucrat " << this->getName() << " only has a grade of " << this->getGrade() << std::endl;
+		std::cout << "Form " << form.getName() << " need a grade of " << form.getGradeRequirementToExecute() << " to be signed, but bureaucrat " << this->getName() << " only has a grade of " << this->getGrade() << std::endl;
 	}
 }
