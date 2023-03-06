@@ -67,6 +67,6 @@ std::ostream &operator<<(std::ostream &os, const Form &form) {
     os << "Form name: " << form.getName() << "\n"
     << "is signed : " << (form.getSign() ? "true" : "false")<< "\n"
     << "grade requirement to sign : " << form.getGradeRequirementToSign() << "\n"
-    << "grade requirement to execute : " << form.getGradeRequirementToExecute() << std::endl;
+    << "grade requirement to execute : " << form.getGradeRequirementToExecute();
     return (os);
 }
