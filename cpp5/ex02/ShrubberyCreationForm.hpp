@@ -12,6 +12,8 @@ public:
 	ShrubberyCreationForm(std::string target);
 	ShrubberyCreationForm();
 	~ShrubberyCreationForm();
+	ShrubberyCreationForm(const ShrubberyCreationForm &rhs);
+	const ShrubberyCreationForm &operator=(const ShrubberyCreationForm &rhs);
 };
 
 #endif

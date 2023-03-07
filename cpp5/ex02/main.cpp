@@ -27,7 +27,8 @@ void test1() {
 }
 
 void test2() {
-	AForm *robot = new RobotomyRequestForm("mergez");
+	RobotomyRequestForm original("mergez");
+	AForm *robot = new RobotomyRequestForm(original);
 	Bureaucrat theo("Theo", 150);
 
 	theo.signForm(*robot);
@@ -48,7 +49,8 @@ void test2() {
 }
 
 void test3() {
-	AForm *pardon = new PresidentialPardonForm("Michel");
+	PresidentialPardonForm original("Michel");
+	AForm *pardon = new PresidentialPardonForm(original);
 	Bureaucrat theo("Theo", 150);
 
 	theo.signForm(*pardon);

@@ -5,6 +5,9 @@
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target) :
 		AForm("shrubbery creation", 145, 137), target(target) {}
 
+ShrubberyCreationForm::ShrubberyCreationForm() :
+		AForm("shrubbery creation", 145, 137), target("") {}
+
 void ShrubberyCreationForm::execute_real() const {
 	std::ofstream outfile;
 	std::string filename = this->target + "_shrubbery";
@@ -19,5 +22,14 @@ void ShrubberyCreationForm::execute_real() const {
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
-ShrubberyCreationForm::ShrubberyCreationForm() :
-		AForm("shrubbery creation", 145, 137), target("") {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &rhs) :
+		AForm(rhs.getName(), rhs.getGradeRequirementToSign(), rhs.getGradeRequirementToExecute()), target(rhs.target) {
+}
+
+const ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs) {
+	if (this != &rhs) {
+		this->target = rhs.target;
+	}
+	return *this;
+}

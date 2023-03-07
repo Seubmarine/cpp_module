@@ -10,7 +10,10 @@ private:
 
 public:
 	RobotomyRequestForm(std::string target);
+	RobotomyRequestForm();
 	~RobotomyRequestForm();
+	RobotomyRequestForm(const RobotomyRequestForm &rhs);
+	const RobotomyRequestForm &operator=(const RobotomyRequestForm &rhs);
 };
 
 #endif

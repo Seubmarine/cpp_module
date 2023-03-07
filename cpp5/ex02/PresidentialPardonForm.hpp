@@ -10,9 +10,11 @@ private:
 	virtual void execute_real() const;
 
 public:
-	PresidentialPardonForm();
 	PresidentialPardonForm(std::string target);
+	PresidentialPardonForm();
 	~PresidentialPardonForm();
+	PresidentialPardonForm(const PresidentialPardonForm &rhs);
+	const PresidentialPardonForm &operator=(const PresidentialPardonForm &rhs);
 };
 
 #endif
