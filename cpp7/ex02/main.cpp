@@ -47,6 +47,18 @@ void mytest() {
 	std::cout << std::endl;
 }
 
+void test_assign_and_empty_array() {
+	Array<int> empty;
+	for (size_t i = 0; i < empty.size(); i++)
+	{
+		std::cerr << "ERROR: SIZE OF EMPTY ARRAY SHOULD BE ZERO" << std::endl;
+	}
+	Array<int> nonempty(4);
+	nonempty = empty;
+	nonempty = Array<int>(5);
+	nonempty = Array<int>(7);
+}
+
 #define MAX_VAL 750
 int test_original()
 {
@@ -101,5 +113,6 @@ int test_original()
 int main(void)
 {
 	mytest();
+	test_assign_and_empty_array();
 	return test_original();
 }

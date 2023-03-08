@@ -20,6 +20,7 @@ public:
 	~Array() {
 		if (this->elements != NULL) {
 			delete[] elements;
+			elements = NULL;
 			array_size = 0;
 		}
 	}
@@ -34,13 +35,18 @@ public:
 
 	const Array &operator=(const Array &rhs) {
 		if (this != &rhs) {
-			if (this->elements != NULL)
+			if (this->elements != NULL) {
 				delete[] this->elements;
-			this->array_size = rhs.array_size;
-			this->elements = new T[this->array_size]();
-			for (size_t i = 0; i < this->array_size; i++) {
-				this->elements[i] = rhs.elements[i];
+				this->elements = NULL;
 			}
+			this->array_size = rhs.array_size;
+			if (this->array_size) {
+				this->elements = new T[this->array_size]();
+				for (size_t i = 0; i < this->array_size; i++) {
+					this->elements[i] = rhs.elements[i];
+				}
+			}
+			
 		}
 		return *this;
 	}
