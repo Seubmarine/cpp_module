@@ -23,7 +23,7 @@ unsigned long Span::shortestSpan() {
 	sort(this->elements.begin(), this->elements.end());
 	unsigned long shortest_span = std::numeric_limits<unsigned long>::max();
 	for (size_t i = 0; i < this->elements.size() - 1; i++) {
-		unsigned long current_span = std::abs(this->elements[i] - this->elements[i + 1]);
+		unsigned long current_span = std::abs((long)this->elements[i] - (long)this->elements[i + 1]);
 		if (current_span < shortest_span)
 			shortest_span = current_span;
 	}
@@ -33,7 +33,7 @@ unsigned long Span::shortestSpan() {
 unsigned long Span::longestSpan() {
 	if (this->elements.size() <= 1)
 		throw Span::NotEnougthElements();
-	int min = *std::min_element(this->elements.begin(), this->elements.end());
-	int max = *std::max_element(this->elements.begin(), this->elements.end());
+	long min = *std::min_element(this->elements.begin(), this->elements.end());
+	long max = *std::max_element(this->elements.begin(), this->elements.end());
 	return std::abs(min - max);
 }
