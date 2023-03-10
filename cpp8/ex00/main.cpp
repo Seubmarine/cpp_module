@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include "easyfind.hpp"
+#include <exception>
 
 #define sizeof_array(x) (sizeof(x) / sizeof(x[0]))
 
@@ -10,9 +11,9 @@ void print_if_found(T vec, int to_found) {
 	{
 		std::cout << "found: " << easyfind(vec, to_found) << std::endl;
 	}
-	catch(const NotFoundException& e)
+	catch(const std::exception& e)
 	{
-		std::cout << "couldn't find: " << to_found << std::endl;
+		std::cout << e.what() << " couldn't find: " << to_found << std::endl;
 		
 	}
 }

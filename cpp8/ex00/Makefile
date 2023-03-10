@@ -9,7 +9,7 @@ INCLUDE = -I.
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-%.o: %.cpp
+%.o: %.cpp easyfind.hpp
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(NAME) : $(OBJS)
