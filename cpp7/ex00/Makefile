@@ -9,7 +9,7 @@ INCLUDE = -I.
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-%.o: %.cpp
+%.o: %.cpp whatever.hpp
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(NAME) : $(OBJS)
