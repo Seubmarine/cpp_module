@@ -1,23 +1,27 @@
+#ifndef MUTANTSTACK_HPP
+#define MUTANTSTACK_HPP
 
-template <typename C, typename T>
-class MutantStack {
-private:
-	C container;
+#include <stack>
 
+template<typename T> class MutantStack : public std::stack<T>
+{
 public:
-	MutantStack();
-	MutantStack(const MutantStack<T> &rhs);
-	const MutantStack<T> &operator=(const MutantStack<T> &);
-	~MutantStack();
-	void push(const value_type &value);
-	void pop();
-	const T &top();
-	bool empty() const;
-	size_type size() const;
+	MutantStack() {};
+	~MutantStack() {};
+	MutantStack(const MutantStack<T> &rhs) {this->c = rhs.c;};
+	const MutantStack<T> &operator=(const MutantStack<T> &rhs) {
+		if (this != &rhs) {
+			this->c = rhs->c;
+		}
+		return *this;
+	}
+	typedef typename std::stack<T>::container_type::iterator iterator;
+	iterator begin() {
+		return this->c.begin();
+	};
+	iterator end() {
+		return this->c.end();
+	};
 };
 
-MutantStack::MutantStack(/* args */) {
-}
-
-MutantStack::~MutantStack() {
-}
+#endif
