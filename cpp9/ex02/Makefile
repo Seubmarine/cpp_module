@@ -12,7 +12,7 @@ OBJS = $(SRCS:%.cpp=%.o)
 %.o: %.cpp
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) PmergeMe.hpp
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $(NAME)
 
 all: $(NAME)
