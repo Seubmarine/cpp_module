@@ -38,7 +38,7 @@ class ExceptionValueLow : public std::exception {virtual const char* what() cons
 class ExceptionValueHigh : public std::exception {virtual const char* what() const throw() {return "Error: too large a number.";}};
 
 private:
-	std::map<struct Date, float> date_database;
+	std::map<class Date, float> date_database;
 public:
 	BitcoinExchange();
 	~BitcoinExchange();

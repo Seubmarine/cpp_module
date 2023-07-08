@@ -99,8 +99,8 @@ BitcoinExchange::BitcoinExchange()
 		line.erase(line.begin() + line.find(",") , line.end());
 		
 		//Parsing the date
-		struct Date date(line);
-		date_database.insert(std::pair<struct Date, float>(date, value));
+		class Date date(line);
+		date_database.insert(std::pair<class Date, float>(date, value));
 	}
 	
 	database_file.close();
@@ -139,7 +139,7 @@ void BitcoinExchange::RunFile(std::string filepath) {
 			line.erase(line.begin() + line.find("|") , line.end());
 			
 			//Parsing the date
-			struct Date date(line);
+			class Date date(line);
 			if (value < 0)
 				throw BitcoinExchange::ExceptionValueLow();
 			else if (value > 1000)
