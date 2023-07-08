@@ -3,16 +3,16 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 
 NAME = PmergeMe
 
-SRCS = main.cpp
+SRCS = main.cpp PmergeMe.cpp
 
 INCLUDE = -I.
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-%.o: %.cpp
+%.o: %.cpp PmergeMe.hpp
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-$(NAME) : $(OBJS) PmergeMe.hpp
+$(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) -o $(NAME)
 
 all: $(NAME)

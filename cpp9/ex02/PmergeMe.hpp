@@ -21,8 +21,6 @@ template<typename container>
 size_t insert_binary_search(container &c, typename container::iterator low, typename container::iterator high, typename container::value_type &to_find) {
     typename container::iterator middle = low + std::distance(low, high) / 2;
 
-    std::cout << "distance = " << std::distance(low, high) << std::endl;
-    
     if (std::distance(low, high) <= 1 || *middle == to_find)
     {
         if (to_find <= *middle)
@@ -39,52 +37,16 @@ size_t insert_binary_search(container &c, typename container::iterator low, type
     }
     else {
         // c.insert(middle, to_find);    
-		std::cout << "HOHO" << std::endl;
+		// std::cout << "HOHO" << std::endl;
 		return (std::distance(c.begin(), middle));
 	}
 }
 
-size_t jacobsthal(size_t n) {
-	if (n == 0)
-		return 0;
-	if (n == 1)
-		return 1;
-	return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
-}
+size_t jacobsthal(size_t n);
 
-std::vector<size_t> jacobsthal_build(size_t sequence_length) {
-	std::vector<size_t> seq;
-	seq.reserve(sequence_length);
+std::vector<size_t> jacobsthal_build(size_t sequence_length);
 
-	for (size_t i = 0; i <= sequence_length; i++)
-	{
-		size_t num = jacobsthal(i);
-		if (num >= sequence_length)
-			break;
-		seq.push_back(num);
-	}
-	seq.push_back(sequence_length);
-
-	std::vector<size_t> jacob_array;
-	for (size_t i = 1; i < seq.size(); i++) {
-    	for (size_t x = seq[i]; x > seq[i - 1]; x--) {
-        	jacob_array.push_back(x - 1);
-    	}
-	}
-	// size_t jacob_index = 3;
-	// while (jacobsthal(jacob_index) < sequence_lenght - 1) {
-	// 	jacob_array.push_back(jacobsthal(jacob_index));
-	// 	jacob_index++;
-	// }
-	return jacob_array;
-}
-
-
-// template <typename Type>
-bool cmp(const std::pair<int, int>& a, const std::pair<int, int>& b)
-{
-	return (a.second < b.second);
-}
+bool cmp(const std::pair<int, int>& a, const std::pair<int, int>& b);
 
 template<class Iter>
 void merge_sort(Iter first, Iter last)
@@ -112,6 +74,18 @@ private:
 
 public:
 	PmergeMe() {}
+	PmergeMe(const PmergeMe& pm) {
+		*this = pm;
+	}
+	PmergeMe &operator=(const PmergeMe &pm) {
+		this->container_ = pm.container_;
+		this->pair_ = pm.pair_;
+	}
+	
+	void PrintElements() {
+		print_container(container_);
+	}
+	
 	template <typename ConstructIterator>
 	PmergeMe(ConstructIterator begin, ConstructIterator end) : container_(begin, end)
 	{
@@ -124,7 +98,6 @@ public:
 			straggler = container_.back();
 			container_.pop_back();
 		}
-		pair_.reserve(container_.size());
 		for (size_t i = 0; i < container_.size(); i += 2)
 		{
 			std::pair<value_type, value_type> s(container_[i], container_[i + 1]);
@@ -175,8 +148,7 @@ public:
 					(*it) += 1;
 			}
 		}
-		// container_ = sorted;
-		print_container(sorted);
+		container_ = sorted;
 	}
 };
 
