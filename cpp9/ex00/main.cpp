@@ -8,7 +8,6 @@ int main(int argc, char *argv[])
         return 1;
     }
     BitcoinExchange btc_exchange;
-    btc_exchange.DoSomething();
     
     btc_exchange.RunFile(std::string(argv[1]));
     return 0;

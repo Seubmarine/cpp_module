@@ -5,20 +5,26 @@
 
 class Date
 {
-class WrongParsingFormat : public std::exception {virtual const char* what() const throw() {return "couldn't parse date, input must be incorrect";}};
 
 private:
 	unsigned int year;
 	unsigned int month;
 	unsigned int day;
 public:
+	class WrongParsingFormat : public std::exception {virtual const char* what() const throw() {return "Error: could not parse date";}};
+	class ExceptionInvalidDate : public std::exception {virtual const char* what() const throw() {return "Error: date is not a valid date";}};
+	class ExceptionYearReachZero : public std::exception {virtual const char* what() const throw() {return "Error: date is younger than first date in database";}};
+
 	Date();
 	~Date();
+	Date(const Date &date);
+	Date &operator=(const Date &date);
 
 	Date(std::string formated_date);
 	bool operator<(const Date& rhs) const;
 	void ToPreviousDate();
 	void Print() const;
+	void VerifyDate();
 };
 
 class BitcoinExchange
@@ -36,7 +42,9 @@ private:
 public:
 	BitcoinExchange();
 	~BitcoinExchange();
-	void DoSomething();
+	BitcoinExchange(const BitcoinExchange &btc_exchange);
+	BitcoinExchange &operator=(const BitcoinExchange &btc_exchange);
+
 	void RunFile(std::string filepath);
 };
 

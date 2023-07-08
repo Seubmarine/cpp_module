@@ -19,12 +19,22 @@ bool Date::operator<(const Date& rhs) const {
 
 Date::Date() : year(0), month(0), day(0) {}
 Date::~Date() {}
+Date::Date(const Date &date) {
+	*this = date;
+}
+
+Date &Date::operator=(const Date &date) {
+	this->day = date.day;
+	this->month = date.month;
+	this->year = date.year;
+	return *this;
+}
 
 void Date::ToPreviousDate() {
 	if (day == 1) {
 		if (month == 1) {
 			if (year == 0)
-				throw std::exception();
+				throw Date::ExceptionYearReachZero();
 			year--;
 			month = 12;
 		}
@@ -35,6 +45,14 @@ void Date::ToPreviousDate() {
 	}
 	else
 		day--;
+}
+
+void Date::VerifyDate() {
+	unsigned int final_day_of_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	if (this->month > 12 || this->month == 0)
+		throw Date::ExceptionInvalidDate();
+	else if (this->day == 0 || this->day > final_day_of_month[this->month - 1])
+		throw Date::ExceptionInvalidDate();
 }
 
 void Date::Print() const {
@@ -52,13 +70,13 @@ Date::Date(std::string s)
 
 	std::stringstream ss_year(year_string);
 	if (!(ss_year >> this->year))
-		throw std::exception();
+		throw Date::WrongParsingFormat();
 	std::stringstream ss_month(month_string);
 	if (!(ss_month >> this->month))
-		throw std::exception();
+		throw Date::WrongParsingFormat();
 	std::stringstream ss_day(day_string);
 	if (!(ss_day >> this->day))
-		throw std::exception();
+		throw Date::WrongParsingFormat();
 	
 	// std::cout << date.year << " m:" << date.month << " d:" << date.day << std::endl;
 }
@@ -92,22 +110,12 @@ BitcoinExchange::~BitcoinExchange()
 {
 }
 
-void BitcoinExchange::DoSomething()
-{
-    // std::cout << "size: " << this->date_database.size() << std::endl;
-
-	// // Get an iterator pointing to the first element in the map
-  	// std::map<Date, float>::iterator it = this->date_database.begin();
- 
-	// // Iterate through the map and print the elements
-	// while (it != this->date_database.end())
-	// {
-	// 	std::cout << "Key: ";
-	// 	it->first.Print();
-	// 	std::cout << ", Value: " << it->second << std::endl;
-	// 	++it;
-	// }
-	// std::cout << std::endl;
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &btc_exchange) {
+	*this = btc_exchange;
+}
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &btc_exchange) {
+	this->date_database = btc_exchange.date_database;
+	return *this;
 }
 
 void BitcoinExchange::RunFile(std::string filepath) {
@@ -136,7 +144,8 @@ void BitcoinExchange::RunFile(std::string filepath) {
 				throw BitcoinExchange::ExceptionValueLow();
 			else if (value > 1000)
 				throw BitcoinExchange::ExceptionValueHigh();
-
+			date.VerifyDate();
+			
 			while (true) {
 				std::map<Date, float>::iterator search = date_database.find(date);
 				if (search != date_database.end()) {
@@ -147,6 +156,18 @@ void BitcoinExchange::RunFile(std::string filepath) {
 			}
 		}
 		catch(const BitcoinExchange::ExceptionLine& e)
+		{
+			std::cerr << ((const std::exception&)e).what() << " => " << line << std::endl;
+		}
+		catch(const Date::ExceptionInvalidDate& e)
+		{
+			std::cerr << ((const std::exception&)e).what() << " => " << line << std::endl;
+		}
+		catch(const Date::ExceptionYearReachZero& e)
+		{
+			std::cerr << ((const std::exception&)e).what() << " => " << line << std::endl;
+		}
+		catch(const Date::WrongParsingFormat& e)
 		{
 			std::cerr << ((const std::exception&)e).what() << " => " << line << std::endl;
 		}
