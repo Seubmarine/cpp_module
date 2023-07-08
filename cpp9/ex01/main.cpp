@@ -41,7 +41,7 @@ int main(int argc, char const *argv[])
     argc--;
     argv++;
     if (argc <= 0) {
-        std::cout << "No argument provided" << std::endl;
+        std::cerr << "No argument provided" << std::endl;
         return 1;
     }
     std::stack<int> rpn_stack;
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
         else
         {
             if (rpn_stack.size() < 2) {
-                std::cout << "Error" << std::endl;
+                std::cerr << "Error" << std::endl;
                 return 1;
             }
             int right = rpn_stack.top(); 
@@ -75,16 +75,20 @@ int main(int argc, char const *argv[])
                 rpn_stack.push(left * right);
                 break;
             case operation::divide:
-                rpn_stack.push(left / right);
+				if (right == 0) {
+                	std::cerr << "Error: Division by 0" << std::endl;
+					return 1;
+				}
+				rpn_stack.push(left / right);
                 break;
             case operation::invalid:
-                std::cout << "Error" << std::endl;
+                std::cerr << "Error" << std::endl;
                 return 1;
             }
         }
     }
     if (rpn_stack.size() != 1) {
-        std::cout << "Error" << std::endl;
+        std::cerr << "Error" << std::endl;
         return 1;
     }
     std::cout << rpn_stack.top() << std::endl;
