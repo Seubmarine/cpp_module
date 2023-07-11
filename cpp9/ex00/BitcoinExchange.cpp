@@ -34,7 +34,7 @@ void Date::ToPreviousDate() {
 	if (day == 1) {
 		if (month == 1) {
 			if (year == 0)
-				throw Date::ExceptionYearReachZero();
+				throw Date::ExceptionYearIsTooYoung();
 			year--;
 			month = 12;
 		}
@@ -145,8 +145,11 @@ void BitcoinExchange::RunFile(std::string filepath) {
 			else if (value > 1000)
 				throw BitcoinExchange::ExceptionValueHigh();
 			date.VerifyDate();
-			
+			const Date &youngest_date = (*date_database.begin()).first;
 			while (true) {
+				if (date < youngest_date) {
+					throw Date::ExceptionYearIsTooYoung();
+				}
 				std::map<Date, float>::iterator search = date_database.find(date);
 				if (search != date_database.end()) {
 					std::cout << line << " => " << ((*search).second * value) << std::endl;
@@ -163,7 +166,7 @@ void BitcoinExchange::RunFile(std::string filepath) {
 		{
 			std::cerr << ((const std::exception&)e).what() << " => " << line << std::endl;
 		}
-		catch(const Date::ExceptionYearReachZero& e)
+		catch(const Date::ExceptionYearIsTooYoung& e)
 		{
 			std::cerr << ((const std::exception&)e).what() << " => " << line << std::endl;
 		}

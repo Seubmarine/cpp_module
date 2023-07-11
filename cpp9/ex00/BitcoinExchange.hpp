@@ -13,7 +13,7 @@ private:
 public:
 	class WrongParsingFormat : public std::exception {virtual const char* what() const throw() {return "Error: could not parse date";}};
 	class ExceptionInvalidDate : public std::exception {virtual const char* what() const throw() {return "Error: date is not a valid date";}};
-	class ExceptionYearReachZero : public std::exception {virtual const char* what() const throw() {return "Error: date is younger than first date in database";}};
+	class ExceptionYearIsTooYoung : public std::exception {virtual const char* what() const throw() {return "Error: date is younger than first date in database";}};
 
 	Date();
 	~Date();
