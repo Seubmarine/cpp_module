@@ -7,10 +7,9 @@ int main(int argc, char *argv[])
         std::cerr << "Error: couldn't open file." << std::endl;
         return 1;
     }
-    BitcoinExchange btc_exchange;
-    
 	try
 	{
+    	BitcoinExchange btc_exchange;
     	btc_exchange.RunFile(std::string(argv[1]));
 	}
 	catch(const std::exception& e)
