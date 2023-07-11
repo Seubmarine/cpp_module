@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include<iomanip>
 #define DATABASE_PATH "data.csv"
 
 
@@ -152,7 +153,7 @@ void BitcoinExchange::RunFile(std::string filepath) {
 				}
 				std::map<Date, float>::iterator search = date_database.find(date);
 				if (search != date_database.end()) {
-					std::cout << line << " => " << ((*search).second * value) << std::endl;
+					std::cout << line << " => " << std::fixed << std::setprecision(2) << ((*search).second * value) << std::endl;
 					break;
 				}
 				date.ToPreviousDate();
