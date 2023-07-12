@@ -38,6 +38,7 @@ int string_to_int(std::string s, int &number) {
 
 int main(int argc, char const *argv[])
 {
+	try {
     argc--;
     argv++;
     if (argc <= 0) {
@@ -92,5 +93,8 @@ int main(int argc, char const *argv[])
         return 1;
     }
     std::cout << rpn_stack.top() << std::endl;
-    return 0;
+	} catch (const std::exception &e) {
+		std::cerr << e.what() << '\n';
+	}
+	return 0;
 }
