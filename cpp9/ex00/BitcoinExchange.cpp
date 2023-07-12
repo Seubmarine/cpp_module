@@ -1,24 +1,24 @@
 #include "BitcoinExchange.hpp"
-#include <iostream>
 #include <fstream>
-#include <string>
+#include <iomanip>
+#include <iostream>
 #include <sstream>
-#include<iomanip>
+#include <string>
 #define DATABASE_PATH "data.csv"
 
-
-bool Date::operator<(const Date& rhs) const {
+bool Date::operator<(const Date &rhs) const {
 	if (year < rhs.year)
-        return true;
-    else if (year == rhs.year && month < rhs.month)
-        return true;
-    else if (year == rhs.year && month == rhs.month && day < rhs.day)
-        return true;
-    else
-        return false;
+		return true;
+	else if (year == rhs.year && month < rhs.month)
+		return true;
+	else if (year == rhs.year && month == rhs.month && day < rhs.day)
+		return true;
+	else
+		return false;
 }
 
-Date::Date() : year(0), month(0), day(0) {}
+Date::Date() :
+		year(0), month(0), day(0) {}
 Date::~Date() {}
 Date::Date(const Date &date) {
 	*this = date;
@@ -38,18 +38,16 @@ void Date::ToPreviousDate() {
 				throw Date::ExceptionYearIsTooYoung();
 			year--;
 			month = 12;
-		}
-		else
+		} else
 			month--;
-		unsigned int final_day_of_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		unsigned int final_day_of_month[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 		day = final_day_of_month[month - 1];
-	}
-	else
+	} else
 		day--;
 }
 
 void Date::VerifyDate() {
-	unsigned int final_day_of_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	unsigned int final_day_of_month[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	if (this->month > 12 || this->month == 0)
 		throw Date::ExceptionInvalidDate();
 	else if (this->day == 0 || this->day > final_day_of_month[this->month - 1])
@@ -60,9 +58,7 @@ void Date::Print() const {
 	std::cout << this->year << '-' << this->month << '-' << this->day;
 }
 
-
-Date::Date(std::string s)
-{
+Date::Date(std::string s) {
 	std::string year_string(s.begin(), s.begin() + s.find("-")); // take the value token
 	s.erase(s.begin(), s.begin() + s.find("-") + 1);
 	std::string month_string(s.begin(), s.begin() + s.find("-")); // take the value token
@@ -78,37 +74,34 @@ Date::Date(std::string s)
 	std::stringstream ss_day(day_string);
 	if (!(ss_day >> this->day))
 		throw Date::WrongParsingFormat();
-	
+
 	// std::cout << date.year << " m:" << date.month << " d:" << date.day << std::endl;
 }
 
-BitcoinExchange::BitcoinExchange()
-{
+BitcoinExchange::BitcoinExchange() {
 	std::ifstream database_file(DATABASE_PATH);
 	if (!database_file)
 		throw BitcoinExchange::ExceptionDatabasePath();
 	std::string line;
 	std::getline(database_file, line);
 	while (std::getline(database_file, line)) {
-		
 		//Parsing the price value
-		std::string float_string(line.begin() + line.find(",") + 1 , line.end()); // take the value token
+		std::string float_string(line.begin() + line.find(",") + 1, line.end()); // take the value token
 		float value = 0.0f;
 		std::stringstream ss(float_string);
 		if (!(ss >> value))
 			throw BitcoinExchange::ExceptionValue();
-		line.erase(line.begin() + line.find(",") , line.end());
-		
+		line.erase(line.begin() + line.find(","), line.end());
+
 		//Parsing the date
 		class Date date(line);
 		date_database.insert(std::pair<class Date, float>(date, value));
 	}
-	
+
 	database_file.close();
 }
 
-BitcoinExchange::~BitcoinExchange()
-{
+BitcoinExchange::~BitcoinExchange() {
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &btc_exchange) {
@@ -125,20 +118,20 @@ void BitcoinExchange::RunFile(std::string filepath) {
 		throw BitcoinExchange::ExceptionInputPath();
 	std::string line;
 	std::getline(database_file, line);
+	if (line != "date | value")
+		throw BitcoinExchange::ExceptionLine();
 	while (std::getline(database_file, line)) {
-		
-		try
-		{
+		try {
 			//Parsing the price value
 			if (line.find('|') == std::string::npos)
-				throw BitcoinExchange::ExceptionLine(); 
-			std::string float_string(line.begin() + line.find("|") + 1 , line.end()); // take the value token
+				throw BitcoinExchange::ExceptionLine();
+			std::string float_string(line.begin() + line.find("|") + 1, line.end()); // take the value token
 			float value = 0.0f;
 			std::stringstream ss(float_string);
 			if (!(ss >> value))
 				throw BitcoinExchange::ExceptionValue();
-			line.erase(line.begin() + line.find("|") , line.end());
-			
+			line.erase(line.begin() + line.find("|"), line.end());
+
 			//Parsing the date
 			class Date date(line);
 			if (value < 0)
@@ -146,37 +139,23 @@ void BitcoinExchange::RunFile(std::string filepath) {
 			else if (value > 1000)
 				throw BitcoinExchange::ExceptionValueHigh();
 			date.VerifyDate();
-			const Date &youngest_date = (*date_database.begin()).first;
-			while (true) {
-				if (date < youngest_date) {
-					throw Date::ExceptionYearIsTooYoung();
-				}
-				std::map<Date, float>::iterator search = date_database.find(date);
-				if (search != date_database.end()) {
-					std::cout << line << " => " << std::fixed << std::setprecision(2) << ((*search).second * value) << std::endl;
-					break;
-				}
-				date.ToPreviousDate();
-			}
-		}
-		catch(const BitcoinExchange::ExceptionLine& e)
-		{
-			std::cerr << ((const std::exception&)e).what() << " => " << line << std::endl;
-		}
-		catch(const Date::ExceptionInvalidDate& e)
-		{
-			std::cerr << ((const std::exception&)e).what() << " => " << line << std::endl;
-		}
-		catch(const Date::ExceptionYearIsTooYoung& e)
-		{
-			std::cerr << ((const std::exception&)e).what() << " => " << line << std::endl;
-		}
-		catch(const Date::WrongParsingFormat& e)
-		{
-			std::cerr << ((const std::exception&)e).what() << " => " << line << std::endl;
-		}
-		catch(const std::exception& e)
-		{
+
+			std::map<Date, float>::iterator search = date_database.upper_bound(date);
+			if (search == date_database.begin())
+				throw Date::ExceptionYearIsTooYoung();
+
+			std::cout << line << "=> " << value << " = ";
+			std::cout << ((*(--search)).second * value) << std::endl;
+
+		} catch (const BitcoinExchange::ExceptionLine &e) {
+			std::cerr << ((const std::exception &)e).what() << " => " << line << std::endl;
+		} catch (const Date::ExceptionInvalidDate &e) {
+			std::cerr << ((const std::exception &)e).what() << " => " << line << std::endl;
+		} catch (const Date::ExceptionYearIsTooYoung &e) {
+			std::cerr << ((const std::exception &)e).what() << " => " << line << std::endl;
+		} catch (const Date::WrongParsingFormat &e) {
+			std::cerr << ((const std::exception &)e).what() << " => " << line << std::endl;
+		} catch (const std::exception &e) {
 			std::cerr << e.what() << '\n';
 		}
 	}
